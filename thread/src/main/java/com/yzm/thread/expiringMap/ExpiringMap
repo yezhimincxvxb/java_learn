@@ -1,0 +1,28 @@
+### ExpiringMap
+一个可以设置过期时间的存储容器
+
+### 依赖
+<dependency>
+    <groupId>net.jodah</groupId>
+    <artifactId>expiringmap</artifactId>
+    <version>0.5.8</version>
+</dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
