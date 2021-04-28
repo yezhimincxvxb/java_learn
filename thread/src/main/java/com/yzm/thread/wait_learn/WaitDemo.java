@@ -2,50 +2,60 @@ package com.yzm.thread.wait_learn;
 
 public class WaitDemo {
 
+    public static void main(String[] args) {
+        demo01();
+//        demo02();
+    }
+
+    //=============================================================
+
+    private static final WaitDemo demo = new WaitDemo();
+
     /**
      * 控制线程间的执行顺序
      */
     private static void demo01() {
-        WaitDemo lock = new WaitDemo();
-
-        Thread t1 = new Thread(() -> {
-            System.out.println("子线程：" + Thread.currentThread().getName() + "--> 等待获取锁lock");
-            try {
-                Thread.sleep(3000);
-                synchronized (lock) {
-                    System.out.println("子线程：" + Thread.currentThread().getName() + "--> 获取到锁lock");
-                    System.out.println("子线程：" + Thread.currentThread().getName() + "--> 任务完成");
-                    lock.notifyAll();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }, "t1");
-
-        Thread t2 = new Thread(() -> {
-            System.out.println("子线程：" + Thread.currentThread().getName() + "--> 等待获取锁lock");
-            try {
-                Thread.sleep(1000);
-                synchronized (lock) {
-                    System.out.println("子线程：" + Thread.currentThread().getName() + "--> 获取到锁lock");
-                    System.out.println("子线程：" + Thread.currentThread().getName() + "--> 执行wait方法，线程挂起，等待被唤醒");
-                    Thread.sleep(3000);
-                    lock.wait();
-                    System.out.println("子线程：" + Thread.currentThread().getName() + "--> 任务完成");
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }, "t2");
+        Thread t1 = new Thread(demo::method01, "t1");
+        Thread t2 = new Thread(demo::method01_2, "t2");
 
         t1.start();
         t2.start();
     }
 
-    public static void main(String[] args) {
-//        demo01();
-        demo02();
+    private void method01() {
+        String name = Thread.currentThread().getName();
+        System.out.println("子线程：" + name + " is ready");
+        try {
+            Thread.sleep(10);
+            synchronized (demo) {
+                System.out.println("子线程：" + name + "--> 获取到锁");
+                System.out.println("子线程：" + name + "--> 执行wait方法，线程挂起，等待被唤醒");
+                Thread.sleep(3000);
+                demo.wait();
+                System.out.println("子线程：" + name + " is over");
+                demo.notifyAll();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void method01_2() {
+        String name = Thread.currentThread().getName();
+        System.out.println("子线程：" + name + " is ready");
+        try {
+            Thread.sleep(50);
+            synchronized (demo) {
+                System.out.println("子线程：" + name + "--> 获取到锁");
+                System.out.println("子线程：" + name + "--> 执行notifyAll方法，唤醒其他线程并调用wait方法使自己挂起");
+                Thread.sleep(3000);
+                demo.notifyAll();
+                demo.wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("子线程：" + name + " is over");
     }
 
     // 定义生产最大量
