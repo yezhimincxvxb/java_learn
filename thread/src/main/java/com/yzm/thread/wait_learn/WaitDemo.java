@@ -1,12 +1,12 @@
-package com.yzm.thread.waitAndNotify;
+package com.yzm.thread.wait_learn;
 
-public class WaitAndNotify {
+public class WaitDemo {
 
     /**
      * 控制线程间的执行顺序
      */
     private static void demo01() {
-        WaitAndNotify lock = new WaitAndNotify();
+        WaitDemo lock = new WaitDemo();
 
         Thread t1 = new Thread(() -> {
             System.out.println("子线程：" + Thread.currentThread().getName() + "--> 等待获取锁lock");
@@ -77,7 +77,7 @@ public class WaitAndNotify {
     }
 
     private static void demo02() {
-        WaitAndNotify lock = new WaitAndNotify();
+        WaitDemo lock = new WaitDemo();
         // 创建t1线程，生产资源
         Thread t1 = new Thread(() -> {
             try {
