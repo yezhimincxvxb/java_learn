@@ -5,24 +5,24 @@ public class SynchronizedDemo {
     public static void main(String[] args) throws InterruptedException {
 //        demo01();
 //        demo02();
-//        demo02_2();
+        demo02_2();
 //        demo02_3();
 //        demo03();
 //        demo04();
-        demo05();
+//        demo05();
     }
 
     //=======================================================================================================
 
     //共享变量
     private static int inc = 0;
+    private static final SynchronizedDemo demo = new SynchronizedDemo();
 
     /**
      * 不加 synchronized 处理
      * 多次测试，不能保证最终结果一致
      */
     private static void demo01() {
-        SynchronizedDemo demo = new SynchronizedDemo();
         for (int i = 1; i <= 2; i++) {
             new Thread(demo::method01, "t" + i).start();
         }
@@ -31,6 +31,10 @@ public class SynchronizedDemo {
     }
 
     private void method01() {
+        common();
+    }
+
+    private static void common() {
         System.out.println("线程：" + Thread.currentThread().getName() + " is ready >> " + inc);
         try {
             Thread.sleep(10);
@@ -53,7 +57,6 @@ public class SynchronizedDemo {
      * 能保证最终结果一致
      */
     private static void demo02() {
-        SynchronizedDemo demo = new SynchronizedDemo();
         for (int i = 1; i <= 2; i++) {
             new Thread(demo::method02, "t" + i).start();
         }
@@ -62,44 +65,22 @@ public class SynchronizedDemo {
     }
 
     private synchronized void method02() {
-        System.out.println("线程：" + Thread.currentThread().getName() + " is ready >> " + inc);
-        try {
-            Thread.sleep(10);
-            for (int i = 0; i < 1000; i++) {
-                inc++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("线程：" + Thread.currentThread().getName() + " is over >> " + inc);
+        common();
     }
 
     //=======================================================================================================
 
     /**
-     * 一个线程获取了该对象的锁之后，其他线程可以访问其他非synchronized实例方法(method02_2 不加 synchronized)
-     * 一个线程获取了该对象的锁之后，其他线程无法访问其他synchronized实例方法(method02_2 加 synchronized)
+     * 一个线程获取了该对象的锁之后，其他线程可以访问其他非synchronized实例方法(method01 非synchronized，同时交替运行)
+     * 一个线程获取了该对象的锁之后，其他线程无法访问其他synchronized实例方法(method02 synchronized)
      */
     private static void demo02_2() {
-        SynchronizedDemo demo = new SynchronizedDemo();
-        new Thread(demo::method02, "t1").start();
-        new Thread(demo::method02_2, "t2").start();
+//        new Thread(demo::method01, "t1").start();
+        new Thread(demo::method02, "t2").start();
+        new Thread(demo::method02, "t3").start();
 
         while (Thread.activeCount() > 2) Thread.yield();
         System.out.println("inc =" + inc);
-    }
-
-    private synchronized void method02_2() {
-        System.out.println("线程：" + Thread.currentThread().getName() + " is ready >> " + inc);
-        try {
-            Thread.sleep(10);
-            for (int i = 0; i < 1000; i++) {
-                inc++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("线程：" + Thread.currentThread().getName() + " is over >> " + inc);
     }
 
     //=======================================================================================================
@@ -109,7 +90,6 @@ public class SynchronizedDemo {
      * 因为两个线程作用于不同的对象，获得的是不同的锁，所以互相并不影响
      */
     private static void demo02_3() {
-        SynchronizedDemo demo = new SynchronizedDemo();
         SynchronizedDemo demo2 = new SynchronizedDemo();
         new Thread(demo::method02, "t1").start();
         new Thread(demo2::method02, "t2").start();
@@ -132,25 +112,15 @@ public class SynchronizedDemo {
     }
 
     private static synchronized void method03() {
-        System.out.println("线程：" + Thread.currentThread().getName() + " is ready >> " + inc);
-        try {
-            Thread.sleep(10);
-            for (int i = 0; i < 1000; i++) {
-                inc++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("线程：" + Thread.currentThread().getName() + " is over >> " + inc);
+        common();
     }
 
     //=======================================================================================================
 
     /**
-     * synchronized作用于同步代码块
+     * synchronized作用于代码块
      */
     private static void demo04() {
-        SynchronizedDemo demo = new SynchronizedDemo();
         new Thread(demo::method04, "t1").start();
         new Thread(demo::method04, "t2").start();
 
@@ -177,13 +147,12 @@ public class SynchronizedDemo {
 
     /**
      * synchronized 的可重入性
-     *
+     * <p>
      * 在获取当前实例对象锁后进入synchronized代码块执行同步代码，并在代码块中调用了当前实例对象的另外一个synchronized方法，
      * 再次请求当前实例锁时，将被允许，进而执行方法体代码，这就是重入锁最直接的体现，需要特别注意另外一种情况，当子类继承父类时，
      * 子类也是可以通过可重入锁调用父类的同步方法。注意由于synchronized是基于monitor实现的，因此每次重入，monitor中的计数器仍会加1。
      */
     private static void demo05() throws InterruptedException {
-        SynchronizedDemo demo = new SynchronizedDemo();
         Thread t1 = new Thread(demo::method05, "t1");
         t1.start();
         t1.join();
