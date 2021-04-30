@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Slf4j
 public class AsyncConfig implements AsyncConfigurer {
 
-    @Bean(name = "default_async_Pool", destroyMethod = "shutdown")
+    @Bean(name = "default_async_pool", destroyMethod = "shutdown")
     public ThreadPoolTaskExecutor defaultAsyncPool() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         // 设置线程池前缀：方便排查
@@ -44,7 +44,7 @@ public class AsyncConfig implements AsyncConfigurer {
         return executor;
     }
 
-    @Bean(name = "another_async_Pool", destroyMethod = "shutdown")
+    @Bean(name = "another_async_pool", destroyMethod = "shutdown")
     public ThreadPoolTaskExecutor anotherAsyncPool() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         // 设置线程池前缀：方便排查

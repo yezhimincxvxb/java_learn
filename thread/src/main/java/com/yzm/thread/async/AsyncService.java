@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Future;
 
-@Component
 @Slf4j
+@Component
 public class AsyncService {
 
     /**
@@ -27,7 +27,7 @@ public class AsyncService {
      *
      * @param i 传入参数
      */
-    @Async("another_async_Pool")
+    @Async("another_async_pool")
     public void async(int i) {
         log.info("有参无返回值方法, 参数={}", i);
     }

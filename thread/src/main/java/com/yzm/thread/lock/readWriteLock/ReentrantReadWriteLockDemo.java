@@ -1,4 +1,4 @@
-package com.yzm.thread.readWriteLock;
+package com.yzm.thread.lock.readWriteLock;
 
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
