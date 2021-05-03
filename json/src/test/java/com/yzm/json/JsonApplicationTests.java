@@ -1,10 +1,10 @@
-package com.yzm.lock;
+package com.yzm.json;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LockApplicationTests {
+class JsonApplicationTests {
 
     @Test
     void contextLoads() {

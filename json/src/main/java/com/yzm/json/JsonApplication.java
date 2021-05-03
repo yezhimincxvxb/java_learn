@@ -1,13 +1,13 @@
-package com.yzm.lock;
+package com.yzm.json;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LockApplication {
+public class JsonApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LockApplication.class, args);
+        SpringApplication.run(JsonApplication.class, args);
     }
 
 }

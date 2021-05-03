@@ -20,7 +20,7 @@
     <modules>
         <module>base</module>
         <module>jdbc</module>
-        <module>lock</module>
+        <module>json</module>
         <module>thread</module>
     </modules>
 
