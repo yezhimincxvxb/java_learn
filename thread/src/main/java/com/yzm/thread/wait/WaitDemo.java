@@ -1,4 +1,4 @@
-package com.yzm.thread.wait_learn;
+package com.yzm.thread.wait;
 
 
 public class WaitDemo {

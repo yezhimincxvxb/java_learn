@@ -1,4 +1,4 @@
-package com.yzm.thread.volatile_learn;
+package com.yzm.thread.volatile_;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

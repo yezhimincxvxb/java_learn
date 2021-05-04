@@ -1,4 +1,4 @@
-package com.yzm.base.transient_learm;
+package com.yzm.base.transient_;
 
 import lombok.extern.slf4j.Slf4j;
 

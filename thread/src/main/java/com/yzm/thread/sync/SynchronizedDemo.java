@@ -1,4 +1,4 @@
-package com.yzm.thread.synchronized_learn;
+package com.yzm.thread.sync;
 
 public class SynchronizedDemo {
 

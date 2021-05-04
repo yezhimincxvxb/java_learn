@@ -5,6 +5,9 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * 原子操作
+ */
 public class AtomicDemo {
 
     public static void main(String[] args) {

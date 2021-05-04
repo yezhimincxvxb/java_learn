@@ -1,4 +1,4 @@
-package com.yzm.thread.join_learn;
+package com.yzm.thread.join;
 
 /**
  * 在很多情况下，主线程创建并启动子线程，如果子线程中要进行大量的耗时运算，主线程将可能早于子线程结束。

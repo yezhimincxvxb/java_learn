@@ -2,6 +2,9 @@ package com.yzm.thread.countDownLatch;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * 控制线程启动
+ */
 public class CountDownLatchDemo {
 
     public static void main(String[] args) {
