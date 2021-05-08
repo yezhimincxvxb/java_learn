@@ -1,8 +1,8 @@
 package com.yzm.io.file;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * 文件
@@ -10,29 +10,34 @@ import java.io.IOException;
 public class FileDemo {
 
     public static void main(String[] args) {
-        demo01();
+//        demo01();
+//        demo02();
+        demo03();
     }
+
 
     private static void demo01() {
-        File file  = new File("C:\\b.txt");
-        System.out.println(file.isFile());
-        System.out.println(file.isHidden());
-
+        File fileSrc = new File("C:\\a\\2.txt.txt");
+        File fileDest = new File("C:\\b\\2.txt.txt");
+        System.out.println(fileSrc.renameTo(fileDest));
     }
 
-    private static void demo01_() {
-        String parentPath = System.getProperty("user.dir") + "\\io" + "\\src\\main\\resources";
+    private static void demo02() {
+        File file = new File("C:\\a");
+        File file2 = new File("C:\\a\\1.txt");
+        System.out.println(file.isFile());
+        System.out.println(file2.isFile());
+        System.out.println(file.isDirectory());
+        System.out.println(file2.isDirectory());
+    }
+
+    private static void demo03() {
         try {
-            File file = new File(parentPath, "a.txt");
-            FileReader fr = new FileReader(file);
-            char[] c = new char[1024];
-            int leg = fr.read(c);
-            String s = new String(c, 0, leg);
-            System.out.println(s);
+            File file = File.createTempFile("temp", ".txt", new File("C:\\a"));
+            System.out.println(file.getPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
 }

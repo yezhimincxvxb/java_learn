@@ -2,41 +2,30 @@
 File(String pathname) ==> File file = new File("C:\\a.txt");
 File(String parent, String child) ==> File file = new File("C:\\","a.txt");
 File(File parent, String child) ==> File file  = new File(new File("C:\\"),"a.txt");
+static File createTempFile(String prefix, String suffix, File directory) ==> 在指定目录下创建临时文件
 
 ###File常用方法
-创建：
-createNewFile()在指定位置创建一个空文件，成功就返回true，如果已存在就不创建，然后返回false。
-mkdir() 在指定位置创建一个单级文件夹。
-mkdirs() 在指定位置创建一个多级文件夹。
-renameTo(File dest)如果目标文件与源文件是在同一个路径下，那么renameTo的作用是重命名， 如果目标文件与源文件不是在同一个路径下，那么renameTo的作用就是剪切，而且还不能操作文件夹。
-删除：
-delete() 删除文件或者一个空文件夹，不能删除非空文件夹，马上删除文件，返回一个布尔值。
-deleteOnExit()jvm退出时删除文件或者文件夹，用于删除临时文件，无返回值。
-判断：
-exists() 文件或文件夹是否存在。
-isFile() 是否是一个文件，如果不存在，则始终为false。
-isDirectory() 是否是一个目录，如果不存在，则始终为false。
-isHidden() 是否是一个隐藏的文件或是否是隐藏的目录。
-isAbsolute() 测试此抽象路径名是否为绝对路径名。
-获取：
-getName() 获取文件或文件夹的名称，不包含上级路径。
-getAbsolutePath()获取文件的绝对路径，与文件是否存在没关系
-length() 获取文件的大小（字节数），如果文件不存在则返回0L，如果是文件夹也返回0L。
-getParent() 返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回null。
-lastModified()获取最后一次被修改的时间。
-文件夹相关：
-String[] list() 返回目录下的文件或者目录名，包含隐藏文件。对于文件这样操作会返回null。
-listFiles() 返回目录下的文件或者目录对象（File类实例），包含隐藏文件。对于文件这样操作会返回null。
-list(FilenameFilter filter)返回指定当前目录中符合过滤条件的子文件或子目录。对于文件这样操作会返回null。
-listFiles(FilenameFilter filter)返回指定当前目录中符合过滤条件的子文件或子目录。对于文件这样操作会返回null。
+boolean createNewFile() ==> 创建一个空文件。
+boolean mkdir() ==> 创建一个单级文件夹。
+boolean mkdirs() ==> 创建一个多级文件夹。
+boolean renameTo(File dest) ==> 如果目标文件与源文件是在同一个路径下，那么renameTo的作用是重命名，
+                                如果目标文件与源文件不是在同一个路径下，那么renameTo的作用就是剪切。
+boolean delete() ==> 删除文件或者一个空文件夹，不能删除非空文件夹。
+void deleteOnExit() ==> jvm退出时删除文件或者文件夹，用于删除临时文件。
+boolean exists() ==> 文件或文件夹是否存在。
+boolean isFile() ==> 是否是一个文件。
+boolean isDirectory() ==> 是否是一个目录。
+boolean isHidden() ==> 是否是一个隐藏的文件或是否是隐藏的目录。
+boolean isAbsolute() ==> 测试此抽象路径名是否为绝对路径名。
 
+String getName() ==> 获取文件或文件夹的名称，不包含上级路径。
+String getPath() ==> 获取文件的相对路径。
+String getAbsolutePath() ==> 获取文件的绝对路径。
+long length() ==> 获取文件的大小（字节数），如果文件不存在则返回0L，如果是文件夹也返回0L。
+String getParent() ==> 返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回null。
+long lastModified() ==> 获取最后一次被修改的时间。
 
-Files. exists()：检测文件路径是否存在。
-Files. createFile()：创建文件。
-Files. createDirectory()：创建文件夹。
-Files. delete()：删除一个文件或目录。
-Files. copy()：复制文件。
-Files. move()：移动文件。
-Files. size()：查看文件个数。
-Files. read()：读取文件。
-Files. write()：写入文件。
+String[] list() ==> 返回目录中的子文件或者子目录名，包含隐藏文件。对于文件这样操作会返回null。
+File[] listFiles() ==> 返回目录中的子文件或者子目录对象，包含隐藏文件。对于文件这样操作会返回null。
+String[] list(FilenameFilter filter) ==> 返回目录中符合过滤条件的子文件或子目录名。对于文件这样操作会返回null。
+File[] listFiles(FilenameFilter filter)==> 返回目录中符合过滤条件的子文件或子目录对象。对于文件这样操作会返回null。
