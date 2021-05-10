@@ -7,9 +7,8 @@ import com.yzm.json.entity.Student;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class JsonDemo {
 
@@ -56,15 +55,8 @@ public class JsonDemo {
     }
 
     private static void demo02() {
-
-//        method02();
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("key1", "One");
-        map.put("key2", "Two");
-
-        String mapJson = JSON.toJSONString(map);
-        System.out.println("mapJson = " + mapJson);
-
+        method02();
+        method02_2();
     }
 
     private static void method02() {
@@ -75,7 +67,7 @@ public class JsonDemo {
         List<Integer> integers = Arrays.asList(1, 2, 3);
         object.put("hobby", integers);
         object.put("null", null);
-//        System.out.println(object);
+        System.out.println(object);
 
         String s = JSON.toJSONString(object, true);
         System.out.println("s = " + s);
@@ -90,5 +82,42 @@ public class JsonDemo {
         integers.forEach(System.out::println);
         System.out.println(object.getString("null"));
     }
+
+    public static void demo03() {
+        String json = "{'id':'1','name':'admin','password':'123456','dog': {'name':'小狗','age':'2'},'time':'2020-06-01 12:30:20'}";
+        JSONObject jsonObject = JSON.parseObject(json);
+        JSONObject dog = jsonObject.getJSONObject("dog");
+        System.out.println("name = " + dog.getString("name"));
+        System.out.println("age = " + dog.getString("age"));
+        System.out.println("time = " + jsonObject.getDate("time"));
+    }
+
+    public static void demo04() {
+        String json = "{'person':[{'id':'1','name':'admin','password':'123456','time':'2020-06-01 12:30:20'},{'id':'2','name':'user','password':'111111','time':'2020-06-01 12:30:20'}]}";
+        JSONObject jsonObject = JSON.parseObject(json);
+        JSONArray persons = jsonObject.getJSONArray("person");
+        persons.forEach(o -> {
+            JSONObject person = (JSONObject) o;
+            System.out.println("id = " + person.getString("id"));
+            System.out.println("name = " + person.getString("name"));
+            System.out.println("password = " + person.getString("password"));
+            System.out.println("time = " + person.getString("time"));
+        });
+    }
+
+    public static void demo05() {
+        String json = "{'person':[{'id':'3','name':'admin','password':'123456','time':'2020-06-01 12:30:20'},{'id':'4','name':'user','password':'111111','time':'2020-06-01 12:30:20'}]}";
+        JSONObject jsonObject = JSON.parseObject(json);
+        JSONArray persons = jsonObject.getJSONArray("person");
+        persons.forEach(o -> {
+            JSONObject person = (JSONObject) o;
+            Set<String> keys = person.keySet();
+            for (String key : keys) {
+                System.out.println(key + " = " + person.getString(key));
+            }
+        });
+
+    }
+
 
 }

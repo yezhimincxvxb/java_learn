@@ -24,3 +24,7 @@ public static final <T> List<T> parseArray(String text, Class<T> clazz); //把JS
 public static final String toJSONString(Object object); // 将JavaBean序列化为JSON文本
 public static final String toJSONString(Object object, boolean prettyFormat); // 将JavaBean序列化为带格式的JSON文本
 public static final Object toJSON(Object javaObject); //将JavaBean转换为JSONObject或者JSONArray。
+
+###JSONObject
+
+###JSONArray
