@@ -1,4 +1,4 @@
-package com.yzm.io.stream.object_stream;
+package com.yzm.io.stream.object;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

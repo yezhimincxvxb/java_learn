@@ -1,4 +1,4 @@
-package com.yzm.io.stream.data_stream;
+package com.yzm.io.stream.data;
 
 import java.io.*;
 

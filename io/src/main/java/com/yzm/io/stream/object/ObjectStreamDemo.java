@@ -1,4 +1,4 @@
-package com.yzm.io.stream.object_stream;
+package com.yzm.io.stream.object;
 
 import java.io.*;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ public class ObjectStreamDemo {
         FileOutputStream fos;
         ObjectOutputStream oos;
         try {
-            fos = new FileOutputStream(new File(PARENT_PATH, "user.txt"));
+            fos = new FileOutputStream(new File(PARENT_PATH, "object_1.txt"));
             oos = new ObjectOutputStream(fos);
 
             ObjectDemo demo = new ObjectDemo();
@@ -44,7 +44,7 @@ public class ObjectStreamDemo {
         FileInputStream fis;
         ObjectInputStream ois;
         try {
-            fis = new FileInputStream(new File(PARENT_PATH, "user.txt"));
+            fis = new FileInputStream(new File(PARENT_PATH, "object_1.txt"));
             ois = new ObjectInputStream(fis);
 
             ObjectDemo demo = (ObjectDemo) ois.readObject();
@@ -61,7 +61,7 @@ public class ObjectStreamDemo {
         ObjectOutputStream oos;
         ObjectInputStream ois;
         try {
-            File file = new File(PARENT_PATH, "list.txt");
+            File file = new File(PARENT_PATH, "object_2.txt");
             oos = new ObjectOutputStream(new FileOutputStream(file));
             ois = new ObjectInputStream(new FileInputStream(file));
 

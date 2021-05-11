@@ -1,9 +1,9 @@
-package com.yzm.io.stream.file_stream;
+package com.yzm.io.stream.file;
 
 import java.io.*;
 
 /**
- * 文件流
+ * 文件字节流
  * FileOutputStream
  * FileInputStream
  */
@@ -12,9 +12,9 @@ public class FileStreamDemo {
     private static final String PARENT_PATH = System.getProperty("user.dir") + "\\io" + "\\src\\main\\resources\\stream";
 
     public static void main(String[] args) {
-//        demo01();
-//        demo02();
-//        demo03();
+        demo01();
+        demo02();
+        demo03();
     }
 
     /**
@@ -27,7 +27,7 @@ public class FileStreamDemo {
     private static void demo01() {
         OutputStream fos;
         try {
-            fos = new FileOutputStream(new File(PARENT_PATH, "1.txt"));
+            fos = new FileOutputStream(new File(PARENT_PATH, "file_1.txt"));
             fos.write("姓名：张三".getBytes());
             fos.write("\r\n".getBytes());
             fos.write("年龄：18".getBytes());
@@ -46,7 +46,7 @@ public class FileStreamDemo {
     private static void demo02() {
         InputStream fis;
         try {
-            File file = new File(PARENT_PATH, "1.txt");
+            File file = new File(PARENT_PATH, "file_1.txt");
             fis = new FileInputStream(file);
             byte[] b = new byte[(int) file.length()];
             fis.read(b);
@@ -64,8 +64,8 @@ public class FileStreamDemo {
         InputStream fis;
         OutputStream fos;
         try {
-            File fileSrc = new File(PARENT_PATH, "1.txt");
-            File fileDest = new File(PARENT_PATH, "1_copy.txt");
+            File fileSrc = new File(PARENT_PATH, "file_1.txt");
+            File fileDest = new File(PARENT_PATH, "file_1_copy.txt");
             fis = new FileInputStream(fileSrc);
             fos = new FileOutputStream(fileDest);
 
