@@ -74,7 +74,7 @@ public class ByteArrayDemo {
             // 创建ByteArrayOutputStream字节流
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
 
-            // 写入“a”的字节
+            // 写入“a.txt”的字节
             bao.write(97);
             bao.write(src, 1, 5);
             System.out.printf("bao=%s\n", bao);

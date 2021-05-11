@@ -2,7 +2,6 @@ package com.yzm.io.stream.change;
 
 import java.io.*;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 /**
  * 转换流
@@ -23,17 +22,18 @@ public class ChangeDemo {
     private static void demo01() {
         try {
             long start = System.currentTimeMillis();
-            InputStream in = new URL(url).openStream();
-            File file = new File(PARENT_PATH, "change_1.html");
-            FileOutputStream fos = new FileOutputStream(file, true);
+            InputStream is = new URL(url).openStream();
+
+            File file2 = new File(PARENT_PATH, "a_copy.txt");
+            FileOutputStream fos = new FileOutputStream(file2);
 
             byte[] b = new byte[1024];
             int len;
-            while ((len = in.read(b)) != -1) {
+            while ((len = is.read(b)) != -1) {
                 fos.write(b, 0, len);
             }
 
-            in.close();
+            is.close();
             fos.close();
             long end = System.currentTimeMillis();
             System.out.println("demo01耗时 ==> " + (end - start));
@@ -45,12 +45,10 @@ public class ChangeDemo {
     private static void demo02() {
         try {
             long start = System.currentTimeMillis();
-            InputStream in = new URL(url).openStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+            InputStreamReader isr = new InputStreamReader(new URL(url).openStream());
 
-            File file = new File(PARENT_PATH, "change_2.html");
-            FileOutputStream fos = new FileOutputStream(file, true);
-            OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+            File file2 = new File(PARENT_PATH, "a_copy_2.txt");
+            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file2));
 
             char[] c = new char[1024];
             int len;
@@ -70,21 +68,20 @@ public class ChangeDemo {
     private static void demo03() {
         try {
             long start = System.currentTimeMillis();
-            InputStream in = new URL(url).openStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-            BufferedReader bf = new BufferedReader(isr);
+            InputStreamReader isr = new InputStreamReader(new URL(url).openStream());
+            BufferedReader br = new BufferedReader(isr);
 
-            File file = new File(PARENT_PATH, "change_3.html");
-            FileOutputStream fos = new FileOutputStream(file, true);
-            OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+            File file2 = new File(PARENT_PATH, "a_copy_3.txt");
+            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file2));
             BufferedWriter bw = new BufferedWriter(osw);
 
-            String line;
-            while ((line = bf.readLine()) != null) {
-                bw.write(line);
+            char[] c = new char[1024];
+            int len;
+            while ((len = br.read(c)) != -1) {
+                bw.write(c, 0, len);
             }
 
-            bf.close();
+            br.close();
             bw.close();
             long end = System.currentTimeMillis();
             System.out.println("demo03耗时 ==> " + (end - start));

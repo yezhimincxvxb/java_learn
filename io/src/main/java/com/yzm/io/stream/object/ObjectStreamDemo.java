@@ -67,7 +67,7 @@ public class ObjectStreamDemo {
 
 
             List<ObjectDemo> list = Arrays.asList(
-                    new ObjectDemo(1, "a", "a"),
+                    new ObjectDemo(1, "a.txt", "a.txt"),
                     new ObjectDemo(2, "b", "b"),
                     new ObjectDemo(3, "c", "c")
             );
