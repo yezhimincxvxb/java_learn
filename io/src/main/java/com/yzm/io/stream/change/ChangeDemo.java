@@ -27,10 +27,9 @@ public class ChangeDemo {
             File file2 = new File(PARENT_PATH, "a_copy.txt");
             FileOutputStream fos = new FileOutputStream(file2);
 
-            byte[] b = new byte[1024];
-            int len;
-            while ((len = is.read(b)) != -1) {
-                fos.write(b, 0, len);
+            int b;
+            while ((b = is.read()) != -1) {
+                fos.write(b);
             }
 
             is.close();
@@ -50,13 +49,13 @@ public class ChangeDemo {
             File file2 = new File(PARENT_PATH, "a_copy_2.txt");
             OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file2));
 
-            char[] c = new char[1024];
-            int len;
-            while ((len = isr.read(c)) != -1) {
-                osw.write(c, 0, len);
+            int c;
+            while ((c = isr.read()) != -1) {
+                osw.write(c);
             }
 
             isr.close();
+            osw.flush();
             osw.close();
             long end = System.currentTimeMillis();
             System.out.println("demo02耗时 ==> " + (end - start));
@@ -75,13 +74,13 @@ public class ChangeDemo {
             OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file2));
             BufferedWriter bw = new BufferedWriter(osw);
 
-            char[] c = new char[1024];
-            int len;
-            while ((len = br.read(c)) != -1) {
-                bw.write(c, 0, len);
+            String s;
+            while ((s = br.readLine()) != null) {
+                bw.write(s);
             }
 
             br.close();
+            bw.flush();
             bw.close();
             long end = System.currentTimeMillis();
             System.out.println("demo03耗时 ==> " + (end - start));
@@ -89,7 +88,6 @@ public class ChangeDemo {
             e.printStackTrace();
         }
     }
-
 }
 
 
