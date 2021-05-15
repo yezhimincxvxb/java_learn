@@ -20,7 +20,8 @@
     <modules>
         <module>base</module>
         <module>io</module>
-        <module>jdbc</module>
+        <module>mysql</module>
+        <module>network</module>
         <module>json</module>
         <module>utils</module>
         <module>thread</module>
