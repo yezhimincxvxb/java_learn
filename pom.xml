@@ -22,7 +22,7 @@
         <module>io</module>
         <module>mysql</module>
         <module>network</module>
-        <module>json</module>
+        <module>annotation</module>
         <module>utils</module>
         <module>thread</module>
     </modules>

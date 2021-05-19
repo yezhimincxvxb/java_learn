@@ -1,6 +1,5 @@
 package com.yzm.network.http;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
@@ -10,8 +9,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -46,9 +43,9 @@ public class HttpRequestUtil {
      * @return 远程资源的响应结果
      */
     public static String sendGet(String requestUrl, String params, String charset) {
-        if (StringUtils.isEmpty(requestUrl)) throw new IllegalArgumentException("Request Url Empty");
-        if (!StringUtils.isEmpty(params)) requestUrl += "?" + params;
-        if (StringUtils.isEmpty(charset)) charset = CHARSET;
+        if (!StringUtils.hasLength(requestUrl)) throw new IllegalArgumentException("Request Url Empty");
+        if (StringUtils.hasLength(params)) requestUrl += "?" + params;
+        if (!StringUtils.hasLength(charset)) charset = CHARSET;
 
         String result = "";
         try {
@@ -156,28 +153,4 @@ public class HttpRequestUtil {
         connection.disconnect();
         return result.toString();
     }
-
-    public static void main(String[] args) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("version", "v61");
-        map.put("appid", "42293238");
-        map.put("appsecret", "1BucM1Mk");
-        map.put("city", "普宁");
-        String params = joinMapValue(map, '&');
-        //get请求
-        String get = sendGet("https://tianqiapi.com/api", params, "UTF-8");
-        WeatherApi weatherApi = JSON.parseObject(get, WeatherApi.class);
-        System.out.println(weatherApi);
-        System.out.println(JSON.toJSONString(weatherApi, true));
-        //post请求
-        String message = sendPost("https://tcc.taobao.com/cc/json/mobile_tel_segment.htm", "tel=13672787520", "GBK");
-        System.out.println("message = " + message);
-        int index = message.indexOf("{");
-        String substring = message.substring(index);
-        TaoBaoApi taoBaoApi = JSON.parseObject(new String(substring.getBytes(), StandardCharsets.UTF_8), TaoBaoApi.class);
-        System.out.println(taoBaoApi);
-        System.out.println(JSON.toJSONString(taoBaoApi, true));
-    }
-
-
 }
