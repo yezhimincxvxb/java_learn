@@ -1,4 +1,4 @@
-package com.yzm.base.basic;
+package com.yzm.base._integer;
 
 public class IntegerDemo {
 

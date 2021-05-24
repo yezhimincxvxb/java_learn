@@ -1,4 +1,4 @@
-package com.yzm.base.final_;
+package com.yzm.base._final;
 
 /**
  * 被final修饰的类不可以被继承

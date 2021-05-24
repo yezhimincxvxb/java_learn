@@ -1,0 +1,26 @@
+# equals()
+    1.自反性：x.equals(x); // true
+    2.对称性：x.equals(y) == y.equals(x); // true
+    3.传递性：if (x.equals(y) && y.equals(z)) x.equals(z); // true;
+    4.一致性：多次调用 equals() 方法结果不变；如：x.equals(y) == x.equals(y); // true
+    5.与 null 的比较：对任何不是 null 的对象 x 调用 x.equals(null) 结果都为 false；如：x.equals(null); // false;
+# hashcode()
+    两个对象相等，hashcode一定相等
+    两个对象不等，hashcode不一定不等
+    hashcode相等，两个对象不一定相等（"Aa"、"BB"）
+    hashcode不等，两个对象一定不等
+# clone()
+    需要实现Cloneable接口才能调用，同时需要覆写clone()方法
+    浅拷贝：创建一个新对象，然后将当前对象的非静态字段复制到该对象，如果字段类型是值类型（基本类型）的，那么对该字段进行复制；
+            如果字段是引用类型的，则只复制该字段的引用而不复制引用指向的对象。
+            此时新对象里面的引用类型字段相当于是原始对象里面引用类型字段的一个副本，原始对象与新对象里面的引用字段指向的是同一个对象。
+       a.重写clone方法
+       b.BeanUtils.copyProperties()
+    深拷贝：引用类型的属性内容也拷贝一份新的。
+       a.重写clone方法，对象的引用类型属性对象也重写clone方法
+       b.SerializationUtils.clone()
+       c.JSON
+# wait()、notify()、notifyAll()
+    wait：当前线程挂起，等待被其他线程唤醒(notify、notifyAll)；定义超时时间，过了超时时间，加入等待队列
+    notify：随机唤醒一个被挂起的线程
+    notifyAll：唤醒所有被挂起的线程
