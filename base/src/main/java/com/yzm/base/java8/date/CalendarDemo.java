@@ -60,11 +60,5 @@ public class CalendarDemo {
 //        demo03();
 //        demo04();
 //        demo05();
-        String value = "3,333,333.45";
-        value = value.replace(",","");
-        double val = Double.parseDouble(value);
-        val -= 200.0;
-        String format = new DecimalFormat(",###.00").format(val);
-        System.out.println("format = " + format);
     }
 }

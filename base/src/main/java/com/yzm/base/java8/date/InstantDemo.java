@@ -19,12 +19,6 @@ public class InstantDemo {
     }
 
     public static void main(String[] args) {
-//        demo01();
-
-        LocalDate now = LocalDate.of(2020, 9, 7);
-        int i = now.get(ChronoField.DAY_OF_WEEK);
-        System.out.println("i = " + i);
-
-        System.out.println(now.isBefore(LocalDate.now()));
+        demo01();
     }
 }
